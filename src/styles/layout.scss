@@ -1,16 +1,10 @@
 @import "./constants.scss";
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  box-sizing: border-box;
-}
-
 .layout-container {
   width: 100vw;
   height: 100vh;
   background: $bgColor;
+  font-family: $font;
+  color: $black;
+  font-size: 20px;
 }

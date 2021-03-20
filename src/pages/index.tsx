@@ -4,12 +4,13 @@ import { StaticImage } from "gatsby-plugin-image";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import API from "../components/API";
+import "../styles/global.scss";
+import Home from "../components/Home";
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <API />
+    <Home />
   </Layout>
 );
 
