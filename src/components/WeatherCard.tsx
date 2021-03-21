@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sun from "../images/sunnyDay.jpg";
 
-function WeatherCard({ city, location }): JSX.Element {
+function WeatherCard({ city }): JSX.Element {
   const [currTemp, setCurrTemp] = useState(null);
   const [country, setCountry] = useState(null);
   const [description, setDescription] = useState(null);
@@ -10,11 +10,10 @@ function WeatherCard({ city, location }): JSX.Element {
     const apiKey = "7dcbb6c65f7ec1ed04f90091b4b62997";
 
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city},${location}&units=metric&appid=${apiKey}`
+      `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
     )
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         setCurrTemp(res.main?.temp);
         setCountry(res?.sys.country);
         setDescription(res?.weather[0].description);
