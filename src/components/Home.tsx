@@ -9,13 +9,15 @@ function Home(): JSX.Element {
     us: "Atlanta",
   };
 
-  console.log(Object.entries(cities).map(entry => entry));
+  console.log(Object.entries(cities));
 
   return (
     <>
       <div className="cards-container">
         {Object.entries(cities).map((entry, index) => {
-        return <WeatherCard key={index} location={entry.[0]} city={entry[1]} />;
+          return (
+            <WeatherCard key={index} location={entry[0]} city={entry[1]} />
+          );
         })}
       </div>
     </>

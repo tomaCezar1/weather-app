@@ -6,12 +6,15 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import "../styles/global.scss";
 import Home from "../components/Home";
+import { ContextProvider } from "../context/Context";
 
 const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <Home />
-  </Layout>
+  <ContextProvider>
+    <Layout>
+      <SEO title="Home" />
+      <Home />
+    </Layout>
+  </ContextProvider>
 );
 
 export default IndexPage;

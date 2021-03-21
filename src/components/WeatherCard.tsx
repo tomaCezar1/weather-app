@@ -22,7 +22,7 @@ function WeatherCard({ city, location }): JSX.Element {
   };
 
   useEffect(() => {
-    fetchWeather();
+    // fetchWeather();
   });
 
   return (

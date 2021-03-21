@@ -9,6 +9,7 @@
 }
 
 .card-container {
+  cursor: pointer;
   width: 550px;
   height: 250px;
   border-radius: 10px;
@@ -17,6 +18,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 36px;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.03);
+  }
 }
 
 .card-img {
