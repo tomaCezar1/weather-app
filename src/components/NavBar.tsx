@@ -4,6 +4,8 @@ import { Context } from "../context/Context";
 function NavBar() {
   const { input, setInput, cities, setCities } = useContext(Context);
 
+  console.log(input);
+
   const inputHandler = e => {
     const inputValue = e.target.value;
     setInput(inputValue);
