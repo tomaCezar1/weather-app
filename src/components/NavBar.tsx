@@ -35,6 +35,7 @@ function NavBar() {
 
   return (
     <>
+      <h1 className="nav-title">Weather App</h1>
       <nav className="navbar">
         <input
           type="text"

@@ -1,9 +1,10 @@
 @import "./constants.scss";
 
 .layout-container {
-  width: 100vw;
+  width: 100%;
   height: 100%;
-  background: $bgColor;
+  background: url("../images/bgImage.jpg") center center no-repeat;
+  background-size: cover;
   font-family: $font;
   color: $black;
   font-size: 20px;
