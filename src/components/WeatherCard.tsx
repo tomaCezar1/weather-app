@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Context } from "../context/Context";
 import Sun from "../images/sunnyDay.jpg";
 
 function WeatherCard({ city }): JSX.Element {
   const [currTemp, setCurrTemp] = useState(null);
   const [country, setCountry] = useState(null);
   const [description, setDescription] = useState(null);
+  const { hasSearched } = useContext(Context);
 
   const fetchWeather = () => {
     const apiKey = "7dcbb6c65f7ec1ed04f90091b4b62997";
@@ -25,7 +27,11 @@ function WeatherCard({ city }): JSX.Element {
   });
 
   return (
-    <div className="card-container">
+    <div
+      className={
+        hasSearched ? "card-container card-container-deleted" : "card-container"
+      }
+    >
       <div className="img-temp-container">
         <img className="card-img" src={Sun} alt="img" />
         <h1 className="card-temp">{currTemp}&deg;C</h1>

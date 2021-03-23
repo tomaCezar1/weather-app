@@ -2,7 +2,15 @@ import React, { useContext } from "react";
 import { Context } from "../context/Context";
 
 function NavBar() {
-  const { input, setInput, cities, setCities } = useContext(Context);
+  const {
+    input,
+    setInput,
+    cities,
+    setCities,
+    setHasSearched,
+    unmount,
+    setUnmount,
+  } = useContext(Context);
 
   console.log(input);
 
@@ -11,9 +19,17 @@ function NavBar() {
     setInput(inputValue);
   };
 
+  const unmountTimer = () => {
+    setTimeout(() => {
+      setUnmount(true);
+    }, 760);
+  };
+
   const enterPressed = e => {
     if (e.keyCode === 13 && e.key === "Enter") {
       fetchWeather(input);
+      setHasSearched(true);
+      unmountTimer();
     }
   };
 
@@ -35,16 +51,18 @@ function NavBar() {
 
   return (
     <>
-      <h1 className="nav-title">Weather App</h1>
-      <nav className="navbar">
-        <input
-          type="text"
-          onChange={e => inputHandler(e)}
-          onKeyUp={e => enterPressed(e)}
-          className="navbar-input"
-          placeholder="Weather in your city"
-        />
-      </nav>
+      <div className="flex-center-column">
+        <h1 className="nav-title">Weather App</h1>
+        <nav className="navbar">
+          <input
+            type="text"
+            onChange={e => inputHandler(e)}
+            onKeyUp={e => enterPressed(e)}
+            className="navbar-input"
+            placeholder="Enter your city"
+          />
+        </nav>
+      </div>
     </>
   );
 }

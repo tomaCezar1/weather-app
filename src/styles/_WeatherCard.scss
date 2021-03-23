@@ -11,7 +11,7 @@
 .card-container {
   cursor: pointer;
   width: 550px;
-  height: 250px;
+  height: 220px;
   border-radius: 10px;
   background-color: $white;
   display: flex;
@@ -52,4 +52,21 @@
 .card-details-desc {
   font-size: 20px;
   text-transform: capitalize;
+}
+
+.card-container-deleted {
+  animation: delete 750ms forwards;
+}
+
+@keyframes delete {
+  0% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-330px);
+  }
 }

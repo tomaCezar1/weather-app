@@ -12,9 +12,26 @@
 body {
   min-height: 100vh;
   width: 100%;
+  &::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: url("../images/bgImage.jpg") center center no-repeat;
+  }
 }
 
 input {
   outline: none;
   border: none;
+}
+
+.flex-center-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
