@@ -4,7 +4,7 @@ import { Context } from '../context/Context';
 import { apiKey } from '../utils/utils';
 
 function Home(): JSX.Element {
-    const { homeCities } = useContext(Context);
+    const { homeCities, setHomeCities } = useContext(Context);
 
     const [cities, setListOfCities] = useState([]);
     const [countries, setCountries] = useState([]);
@@ -12,7 +12,7 @@ function Home(): JSX.Element {
 
     const fetchWeatherForHome = (cities: number[]) => {
         fetch(
-            `http://api.openweathermap.org/data/2.5/group?id=${homeCities[0]},${homeCities[1]},${homeCities[2]},${homeCities[3]},${homeCities[4]},${homeCities[5]},${homeCities[6]},${homeCities[7]},${homeCities[8]},${homeCities[9]}&units=metric&appid=${apiKey}`
+            `https://api.openweathermap.org/data/2.5/group?id=${homeCities[0]},${homeCities[1]},${homeCities[2]},${homeCities[3]},${homeCities[4]},${homeCities[5]},${homeCities[6]},${homeCities[7]},${homeCities[8]},${homeCities[9]}&units=metric&appid=${apiKey}`
         )
             .then((res) => res.json())
             .then((res) => {
@@ -28,12 +28,23 @@ function Home(): JSX.Element {
                 setListOfCities(tmpCities);
                 setCountries(tmpCountries);
                 setTemp(tmpTemperatures);
+                console.log('request sent');
             });
     };
 
     useEffect(() => {
-        // fetchWeatherForHome(cities);
+        fetchWeatherForHome(cities);
     }, []);
+
+    const triggerDelete = (index) => {
+        console.log('trigger delete');
+        const cities = homeCities;
+        cities.splice(index, 1);
+        console.log(cities);
+        if (setHomeCities(cities)) {
+            console.log('homecities updated');
+        }
+    };
 
     return (
         <>
@@ -45,6 +56,7 @@ function Home(): JSX.Element {
                             country={countries[index]}
                             temp={temp[index]}
                             city={cities[index]}
+                            triggerDelete={() => triggerDelete(index)}
                         />
                     );
                 })}
