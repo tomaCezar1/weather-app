@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div className="page-container">
         <section className="layout-container">
-          <NavBar />
+          {/* <NavBar /> */}
           {children}
         </section>
       </div>
