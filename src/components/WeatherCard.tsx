@@ -49,7 +49,7 @@ function WeatherCard({ cityID, triggerDelete }): JSX.Element {
     };
 
     useEffect(() => {
-        // fetchWeather();
+        fetchWeather();
     });
 
     return (

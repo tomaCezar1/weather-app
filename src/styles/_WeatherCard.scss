@@ -2,7 +2,7 @@
     justify-items: center;
     align-content: center;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap: 30px;
     width: 100%;
     margin: auto;
@@ -27,6 +27,15 @@
         box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
             rgba(17, 17, 26, 0.1) 0px 16px 48px;
     }
+    &:hover .card-location {
+        transform: scale(1.05);
+    }
+    &:hover .card-delete-btn {
+        transform: scale(1.1);
+    }
+    &:hover .card-temp {
+        transform: scale(1.1);
+    }
 }
 
 .card-img {
@@ -46,6 +55,7 @@
 }
 
 .card-temp {
+    transition: transform 0.3s ease;
 }
 
 .card-delete-btn {
@@ -53,10 +63,11 @@
     height: 40px;
     border-radius: 10px;
     border: none;
-    color: $white;
-    background: $black;
+    color: $black;
+    background: $grey;
     opacity: 0.9;
     cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .card-location-container {
@@ -66,6 +77,9 @@
 
 .card-location {
     font-size: 36px;
+    height: 55px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .card-details-desc {

@@ -6,11 +6,9 @@ function Home(): JSX.Element {
     const { homeCities, setHomeCities } = useContext(Context);
 
     const triggerDelete = (index) => {
-        setTimeout(() => {
-            const cities = [...homeCities];
-            cities.splice(index, 1);
-            setHomeCities(cities);
-        }, 760);
+        const cities = [...homeCities];
+        cities.splice(index, 1);
+        setHomeCities(cities);
     };
 
     return (
