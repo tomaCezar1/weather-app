@@ -28,12 +28,14 @@
 
 import React, { useEffect, useState } from 'react';
 import { API_KEY } from '../utils/utils';
+import CloseBtn from '../images/cancel.svg';
 
 function WeatherCard({ cityID, triggerDelete }): JSX.Element {
     const [city, setCity] = useState(null);
     const [currTemp, setCurrTemp] = useState(null);
     const [country, setCountry] = useState(null);
     const [deleted, setDeleted] = useState(false);
+    const [hovered, setHovered] = useState(false);
 
     const fetchWeather = () => {
         fetch(
@@ -54,16 +56,21 @@ function WeatherCard({ cityID, triggerDelete }): JSX.Element {
 
     return (
         // <div className={deleted ? 'card-container card-container-deleted' : 'card-container'}>
-        <div className="card-container">
+        <div
+            className="card-container"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}>
             <div className="card-location-container">
                 <h2 className="card-location">
                     {city}, {country}
                 </h2>
             </div>
             <div className="card-img-container">
-                <button className="card-delete-btn" onClick={triggerDelete}>
-                    -
-                </button>
+                <i
+                    className={`card-delete-btn ${hovered ? 'btn-hovered' : ''}`}
+                    onClick={triggerDelete}>
+                    <img src={CloseBtn} alt="close button" />
+                </i>
                 <h1 className="card-temp">{currTemp}&deg;C</h1>
             </div>
         </div>
