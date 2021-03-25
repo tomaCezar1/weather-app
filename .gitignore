@@ -1,5 +1,6 @@
 #api keys
 .env.development
+.env.production
 
 # Logs
 logs

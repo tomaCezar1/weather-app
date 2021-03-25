@@ -7,10 +7,11 @@
     width: 100%;
     margin: auto;
     padding: 20px;
+    transition: 0.4s ease;
 }
 
 .card-container {
-    width: 400px;
+    width: 100%;
     height: 200px;
     border-radius: 10px;
     background-color: $white;
@@ -94,8 +95,12 @@
     text-transform: capitalize;
 }
 
-.card-container-deleted {
+.deleted-card {
     animation: delete 750ms forwards;
+}
+
+.unmounted-card {
+    display: none;
 }
 
 @keyframes delete {
@@ -108,5 +113,27 @@
         opacity: 0;
         visibility: hidden;
         transform: translateX(-330px);
+    }
+}
+
+@media all and (min-width: 0px) and (max-width: 580px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card-location {
+        font-size: 30px;
+    }
+}
+
+@media all and (min-width: 581px) and (max-width: 960px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+@media all and (min-width: 1300px) {
+    .cards-container {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
