@@ -6,6 +6,7 @@ function WeatherCard({ cityID }): JSX.Element {
     const [city, setCity] = useState(null);
     const [currTemp, setCurrTemp] = useState(null);
     const [country, setCountry] = useState(null);
+    const [weather, setWeather] = useState('');
     const [hovered, setHovered] = useState(false);
     const [deleted, setDeleted] = useState(false);
     const [unmounted, setUnmounted] = useState(false);
@@ -16,11 +17,38 @@ function WeatherCard({ cityID }): JSX.Element {
         )
             .then((res) => res.json())
             .then((res) => {
-                console.log('request sent');
                 setCity(res?.name);
                 setCurrTemp(res?.main.temp);
                 setCountry(res?.sys.country);
+
+                const weather = res.weather[0].main.toLowerCase();
+                identifyWeather(weather);
             });
+    };
+
+    const identifyWeather = (weather: string) => {
+        switch (weather) {
+            case 'clear':
+                {
+                    setWeather('clear-sky');
+                }
+                break;
+            case 'clouds':
+                {
+                    setWeather('clouds');
+                }
+                break;
+            case 'rain':
+                {
+                    setWeather('rain');
+                }
+                break;
+            case 'mist':
+                {
+                    setWeather('mist');
+                }
+                break;
+        }
     };
 
     useEffect(() => {
@@ -34,11 +62,9 @@ function WeatherCard({ cityID }): JSX.Element {
         }, 750);
     };
 
-    return (
+    return !unmounted ? (
         <div
-            className={`card-container ${deleted ? 'deleted-card' : ''} ${
-                unmounted ? 'unmounted-card' : ''
-            }`}
+            className={`card-container ${deleted ? 'deleted-card' : ''} ${weather} `}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}>
             <div className="card-location-container">
@@ -55,7 +81,7 @@ function WeatherCard({ cityID }): JSX.Element {
                 <h1 className="card-temp">{currTemp}&deg;C</h1>
             </div>
         </div>
-    );
+    ) : null;
 }
 
 export default WeatherCard;

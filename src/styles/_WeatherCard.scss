@@ -14,16 +14,14 @@
     width: 100%;
     height: 200px;
     border-radius: 10px;
-    background-color: $white;
     display: flex;
+    color: $black;
     flex-direction: column;
-    align-items: space-between;
     justify-content: space-between;
     align-items: center;
     padding: 36px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
     &:hover {
         transform: scale(1.03);
         box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
@@ -81,6 +79,10 @@
 .card-location-container {
     width: 100%;
     justify-self: flex-start;
+    // background: $white;
+    // border-radius: 10px;
+    // padding: 0 5px;
+    // transition: transform 0.3s ease;
 }
 
 .card-location {
@@ -101,6 +103,36 @@
 
 .unmounted-card {
     display: none;
+}
+
+// Weather types
+.clear-sky {
+    background: url('../images/clear.jpg') center/cover no-repeat;
+}
+
+.rain {
+    background: url('../images/rain.jpg') center/cover no-repeat;
+}
+
+.clouds {
+    background: url('../images/clouds.jpg') center/cover no-repeat,
+        linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 60%) center/cover
+            no-repeat;
+    position: relative;
+}
+
+.clouds::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 60%);
+}
+
+.snow {
+    background: url('../images/snow.jpg') center/cover no-repeat;
+}
+
+.mist {
+    background: url('../images/mint.jpg') center/cover no-repeat;
 }
 
 @keyframes delete {
