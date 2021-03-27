@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { API_KEY } from '../utils/utils';
 import CloseBtn from '../images/cancel.svg';
 
+const moment = require('moment-timezone');
+
 function WeatherCard({ cityID }): JSX.Element {
     const [city, setCity] = useState(null);
     const [currTemp, setCurrTemp] = useState(null);
@@ -10,6 +12,8 @@ function WeatherCard({ cityID }): JSX.Element {
     const [hovered, setHovered] = useState(false);
     const [deleted, setDeleted] = useState(false);
     const [unmounted, setUnmounted] = useState(false);
+    const [time, setTime] = useState('');
+    const [timezone, setTimezone] = useState(0);
 
     const fetchWeather = () => {
         fetch(
@@ -21,10 +25,32 @@ function WeatherCard({ cityID }): JSX.Element {
                 setCurrTemp(res?.main.temp);
                 setCountry(res?.sys.country);
 
+                const timezone = res?.timezone;
+                setTimezone(timezone);
+
                 const weather = res.weather[0].main.toLowerCase();
                 identifyWeather(weather);
+                console.log('fetched');
             });
     };
+
+    useEffect(() => {
+        fetchWeather();
+    }, []);
+
+    const changeTime = (timezone: number) => {
+        const timezoneInMinutes = timezone / 60;
+        const currTime = moment().utcOffset(timezoneInMinutes).format('hh:mm:ss');
+        setTime(currTime);
+    };
+
+    const updateTime = () => {
+        setTimeout(() => {
+            changeTime(timezone);
+        }, 1000);
+    };
+
+    updateTime();
 
     const identifyWeather = (weather: string) => {
         switch (weather) {
@@ -51,10 +77,6 @@ function WeatherCard({ cityID }): JSX.Element {
         }
     };
 
-    useEffect(() => {
-        fetchWeather();
-    }, []);
-
     const triggerDelete = () => {
         setDeleted(true);
         setTimeout(() => {
@@ -80,6 +102,7 @@ function WeatherCard({ cityID }): JSX.Element {
                 </i>
                 <h1 className="card-temp">{currTemp}&deg;C</h1>
             </div>
+            {time}
         </div>
     ) : null;
 }
