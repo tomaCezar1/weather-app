@@ -100,8 +100,8 @@ function WeatherCard({ cityID }): JSX.Element {
                 <img src={CloseBtn} alt="close button" />
             </i>
             <div className="card-details-container">
-                <h1 className="card-details">{time}</h1>
-                <h1 className="card-details">{currTemp}&deg;C</h1>
+                <div className="card-details">{time}</div>
+                <div className="card-details">{currTemp}&deg;C</div>
             </div>
         </div>
     ) : null;
