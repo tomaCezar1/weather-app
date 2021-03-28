@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment-timezone';
+
 import { API_KEY } from '../utils/utils';
 import CloseBtn from '../images/cancel.svg';
-
-const moment = require('moment-timezone');
 
 function WeatherCard({ cityID }): JSX.Element {
     const [city, setCity] = useState(null);
@@ -94,15 +94,15 @@ function WeatherCard({ cityID }): JSX.Element {
                     {city}, {country}
                 </h2>
             </div>
-            <div className="card-img-container">
-                <i
-                    className={`card-delete-btn ${hovered ? 'btn-hovered' : ''}`}
-                    onClick={triggerDelete}>
-                    <img src={CloseBtn} alt="close button" />
-                </i>
-                <h1 className="card-temp">{currTemp}&deg;C</h1>
+            <i
+                className={`card-delete-btn ${hovered ? 'btn-hovered' : ''}`}
+                onClick={triggerDelete}>
+                <img src={CloseBtn} alt="close button" />
+            </i>
+            <div className="card-details-container">
+                <h1 className="card-details">{time}</h1>
+                <h1 className="card-details">{currTemp}&deg;C</h1>
             </div>
-            {time}
         </div>
     ) : null;
 }

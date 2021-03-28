@@ -3,51 +3,30 @@ import { Context } from '../context/Context';
 import { API_KEY } from '../utils/utils';
 
 function NavBar() {
-    const {
-        // input,
-        // setInput,
-        homeCities,
-        setHomeCities,
-        setHasSearched,
-        unmount,
-        setUnmount
-    } = useContext(Context);
-
-    const unmountTimer = () => {
-        setTimeout(() => {
-            setUnmount(true);
-        }, 760);
-    };
-
-    const [input, setInput] = useState('');
+    const { homeCities, setHomeCities } = useContext(Context);
 
     const enterPressed = (e) => {
-        const inputValue = e.target.value;
+        const inputValue = e.target.value.toUpperCase();
         if (e.keyCode === 13 && e.key === 'Enter') {
-            setInput(inputValue);
-            console.log(input);
-            fetchWeather(input);
+            const cities = [...homeCities];
+            const upperCaseCities = cities.map((city) => city.toUpperCase());
+
+            if (upperCaseCities.indexOf(inputValue) < 0) {
+                fetchWeather(inputValue);
+            }
         }
     };
 
-    useEffect(() => {
-        // fetchWeather(input);
-    }, [input]);
-
     const fetchWeather = (input: string) => {
         fetch(
-            `http://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=${API_KEY}`
+            `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=${API_KEY}`
         )
             .then((res) => res.json())
             .then((res) => {
-                const searchedCity = res.name;
-                console.log('request sent on navbar');
-                console.log(homeCities.indexOf(searchedCity));
-                // if (homeCities.indexOf(searchedCity) < 0 && res.cod !== '404') {
-                if (homeCities.indexOf(searchedCity) < 0) {
-                    const citiesCopy = [...homeCities, searchedCity];
-                    setHomeCities(citiesCopy);
-                }
+                const name = res.name;
+                const copy = homeCities.concat(name);
+                setHomeCities(copy);
+                console.log(homeCities);
             });
     };
 
