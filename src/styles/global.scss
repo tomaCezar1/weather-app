@@ -1,37 +1,75 @@
-@import "./layout.scss";
-@import "./layout.scss";
-@import "./WeatherCard.scss";
-@import "./NavBar";
+@import './layout.scss';
+@import './layout.scss';
+@import './WeatherCard.scss';
+@import './NavBar';
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  min-height: 100vh;
-  width: 100%;
-  &::before {
-    content: "";
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background: url("../images/bgImage.jpg") center center no-repeat;
-  }
+    &::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background: url('../images/bgImage.jpg') center center no-repeat;
+    }
 }
 
 input {
-  outline: none;
-  border: none;
+    outline: none;
+    border: none;
 }
 
 .flex-center-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast {
+    width: 350px;
+    height: 75px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 10px;
+    color: $lightGrey;
+    background-color: $red;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.delete-toast {
+    animation: delete-toast 750ms ease-in-out;
+}
+
+@keyframes delete-toast {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
 }

@@ -25,11 +25,21 @@ function ContextProvider({ children }): JSX.Element {
         'Cluj-Napoca'
     ]);
 
+    const [numberOfHomeCards, setNumberOfHomeCards] = useState(9);
+    const [showToast, setShowToast] = useState(false);
+    const [unmountToast, setUnmountToast] = useState(false);
+
     return (
         <Context.Provider
             value={{
                 homeCities,
-                setHomeCities
+                setHomeCities,
+                numberOfHomeCards,
+                setNumberOfHomeCards,
+                showToast,
+                setShowToast,
+                unmountToast,
+                setUnmountToast
             }}>
             {children}
         </Context.Provider>

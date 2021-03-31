@@ -3,16 +3,34 @@ import { Context } from '../context/Context';
 import { API_KEY } from '../utils/utils';
 
 function NavBar() {
-    const { homeCities, setHomeCities } = useContext(Context);
+    const {
+        homeCities,
+        setHomeCities,
+        numberOfHomeCards,
+        setShowToast,
+        setUnmountToast
+    } = useContext(Context);
 
     const enterPressed = (e) => {
         const inputValue = e.target.value.toUpperCase();
-        if (e.keyCode === 13 && e.key === 'Enter') {
-            const cities = [...homeCities];
-            const upperCaseCities = cities.map((city) => city.toUpperCase());
 
-            if (upperCaseCities.indexOf(inputValue) < 0) {
-                fetchWeather(inputValue);
+        if (e.keyCode === 13 && e.key === 'Enter') {
+            if (numberOfHomeCards >= 9) {
+                setShowToast(true);
+                setTimeout(() => {
+                    setUnmountToast(true);
+                }, 4300);
+                setTimeout(() => {
+                    setShowToast(false);
+                    setUnmountToast(false);
+                }, 5000);
+            } else {
+                const cities = [...homeCities];
+                const upperCaseCities = cities.map((city) => city.toUpperCase());
+
+                if (upperCaseCities.indexOf(inputValue) < 0) {
+                    fetchWeather(inputValue);
+                }
             }
         }
     };
@@ -26,7 +44,7 @@ function NavBar() {
                 const name = res.name;
                 const copy = homeCities.concat(name);
                 setHomeCities(copy);
-                console.log(homeCities);
+                console.log('fetched');
             });
     };
 
