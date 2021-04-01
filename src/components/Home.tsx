@@ -1,7 +1,6 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import WeatherCard from './WeatherCard';
 import { Context } from '../context/Context';
-import CloseBtn from '../images/cancel.svg';
 
 function Home(): JSX.Element {
     const {

@@ -1,4 +1,13 @@
 .cards-container {
+    // display: flex;
+    // justify-content: center;
+    // // align-items: center;
+    // flex-wrap: wrap;
+    // gap: 30px;
+    // // width: 100%;
+    // margin: auto;
+    // padding: 20px;
+    // transition: all 0.4ss ease-out;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     align-content: center;
@@ -79,10 +88,11 @@
 }
 
 .card-location {
-    font-size: 36px;
-    height: 55px;
-    padding-right: 10px;
-    padding-left: 10px;
+    font-size: 28px;
+    // height: 55px;
+    // padding-right: 10px;
+    // padding-left: 10px;
+    padding: 5px 10px;
     overflow: hidden;
     transition: transform 0.3s ease;
     background: $lightGrey;
@@ -98,15 +108,24 @@
     animation: delete 750ms forwards;
 }
 
+.card-city {
+    text-transform: capitalize;
+}
+
 @keyframes delete {
     0% {
+        // flex: 1;
+        // width: 100%;
         opacity: 1;
-        visibility: visible;
+        // visibility: visible;
         transform: translateX(0);
     }
+
     100% {
+        // flex: 0;
+        // width: 0;
         opacity: 0;
-        visibility: hidden;
+        // visibility: hidden;
         transform: translateX(-50px);
     }
 }
@@ -116,24 +135,64 @@
 }
 
 // Weather types
-.clear-sky {
-    background: url('../images/clear.jpg') center/cover no-repeat;
+// .clear-sky {
+//     background: url('../images/clear.jpg') center/cover no-repeat;
+// }
+
+// .rain {
+//     background: url('../images/rain.jpg') center/cover no-repeat;
+// }
+
+// .clouds {
+//     background: url('../images/clouds.jpg') center/cover no-repeat;
+// }
+
+// .snow {
+//     background: url('../images/snow.jpg') center/cover no-repeat;
+// }
+
+// .mist {
+//     background: url('../images/mint.jpg') center/cover no-repeat;
+// }
+
+.london {
+    background: url('../images/london.jpeg') center/cover no-repeat;
 }
 
-.rain {
-    background: url('../images/rain.jpg') center/cover no-repeat;
+.bogota {
+    background: url('../images/bogota.jpg') center/cover no-repeat;
 }
 
-.clouds {
-    background: url('../images/clouds.jpg') center/cover no-repeat;
+.seattle {
+    background: url('../images/seattle.jpg') center/cover no-repeat;
 }
 
-.snow {
-    background: url('../images/snow.jpg') center/cover no-repeat;
+.bucharest {
+    background: url('../images/bucharest.jpg') center/cover no-repeat;
 }
 
-.mist {
-    background: url('../images/mint.jpg') center/cover no-repeat;
+.atlanta {
+    background: url('../images/atlanta.jpg') center/cover no-repeat;
+}
+
+.amsterdam {
+    background: url('../images/amsterdam.jpg') center/cover no-repeat;
+}
+
+.cluj-napoca {
+    background: url('../images/cluj.jpg') center/cover no-repeat;
+}
+
+.montevideo {
+    background: url('../images/montevideo.jpg') center/cover no-repeat;
+}
+
+.chisinau {
+    background: url('../images/chisinau.jpg') center/cover no-repeat;
+}
+
+.default {
+    background: url('../images/default.jpg') center/cover no-repeat;
 }
 
 @media all and (min-width: 0px) and (max-width: 580px) {

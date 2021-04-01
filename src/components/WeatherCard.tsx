@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment-timezone';
 
+import { Context } from '../context/Context';
 import { API_KEY } from '../utils/utils';
 import CloseBtn from '../images/cancel.svg';
 
 function WeatherCard({ cityID }): JSX.Element {
+    const { baseCities } = useContext(Context);
+
     const [city, setCity] = useState(null);
+    const [cityBg, setCityBg] = useState(null);
     const [currTemp, setCurrTemp] = useState(null);
     const [country, setCountry] = useState(null);
     const [weather, setWeather] = useState('');
@@ -21,15 +25,24 @@ function WeatherCard({ cityID }): JSX.Element {
         )
             .then((res) => res.json())
             .then((res) => {
-                setCity(res?.name);
-                setCurrTemp(res?.main.temp);
-                setCountry(res?.sys.country);
+                const city = res?.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                setCity(city);
+
+                //function for background CSS
+                checkForDefaultCity(city);
+
+                const temperature = res?.main.temp;
+                const t = Number(temperature.toFixed(1));
+                setCurrTemp(t);
+
+                // setCountry(res?.sys.country);
 
                 const timezone = res?.timezone;
                 setTimezone(timezone);
 
                 const weather = res.weather[0].main.toLowerCase();
-                identifyWeather(weather);
+                // identifyWeather(weather);
+                // identifyCity(city);
                 console.log('fetched');
             });
     };
@@ -37,6 +50,12 @@ function WeatherCard({ cityID }): JSX.Element {
     useEffect(() => {
         fetchWeather();
     }, []);
+
+    const checkForDefaultCity = (city: string) => {
+        if (baseCities.indexOf(city) > -1) {
+            setCityBg(city.toLowerCase());
+        } else setCityBg('default');
+    };
 
     const changeTime = (timezone: number) => {
         const timezoneInMinutes = timezone / 60;
@@ -86,12 +105,12 @@ function WeatherCard({ cityID }): JSX.Element {
 
     return !unmounted ? (
         <div
-            className={`card-container ${deleted ? 'deleted-card' : ''} ${weather} `}
+            className={`card-container ${deleted ? 'deleted-card' : ''} ${cityBg} `}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}>
             <div className="card-location-container">
                 <h2 className="card-location">
-                    {city}, {country}
+                    <span className="card-city">{city}</span>
                 </h2>
             </div>
             <i

@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 
-interface IContext {
-    homeCities: string[];
-    input: string;
-}
-
-const defaultState: IContext = {
+const defaultState = {
     homeCities: [],
     input: ''
 };
@@ -18,7 +13,7 @@ function ContextProvider({ children }): JSX.Element {
         'Bucharest',
         'Atlanta',
         'Montevideo',
-        'Chișinău',
+        'Chisinau',
         'Amsterdam',
         'Seattle',
         'Bogota',
@@ -29,11 +24,24 @@ function ContextProvider({ children }): JSX.Element {
     const [showToast, setShowToast] = useState(false);
     const [unmountToast, setUnmountToast] = useState(false);
 
+    const baseCities = [
+        'London',
+        'Bucharest',
+        'Atlanta',
+        'Montevideo',
+        'Chisinau',
+        'Amsterdam',
+        'Seattle',
+        'Bogota',
+        'Cluj-Napoca'
+    ];
+
     return (
         <Context.Provider
             value={{
                 homeCities,
                 setHomeCities,
+                baseCities,
                 numberOfHomeCards,
                 setNumberOfHomeCards,
                 showToast,
