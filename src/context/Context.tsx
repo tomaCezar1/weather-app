@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 
-const defaultState = {
-    homeCities: [],
-    input: ''
-};
-
-const Context = React.createContext(defaultState);
+const Context = React.createContext(null);
 
 function ContextProvider({ children }): JSX.Element {
     const [homeCities, setHomeCities] = useState([

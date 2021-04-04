@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../context/Context';
 import { API_KEY } from '../utils/utils';
 
@@ -6,10 +6,40 @@ function NavBar() {
     const {
         homeCities,
         setHomeCities,
+        baseCities,
         numberOfHomeCards,
         setShowToast,
         setUnmountToast
     } = useContext(Context);
+
+    useEffect(() => {
+        console.log(suggestions);
+    });
+
+    const [suggestions, setSuggestions] = useState([]);
+    // const [showSuggestions, setShowSuggestions] = useState(false);
+    // const [showAutoComplete, setShowAutoComplete] = useState(false);
+
+    const autoComplete = (e) => {
+        // setShowAutoComplete(true);
+        const input = e.target.value.toLowerCase();
+
+        // if (input.length < 1) {
+        // setShowAutoComplete(false);
+        // }
+
+        const arr = baseCities.map((city) => city.toLowerCase());
+
+        const suggestion = arr.filter((city) => city.startsWith(input));
+        if (suggestion) {
+            setSuggestions(suggestion);
+            // setShowSuggestions(true);
+        }
+    };
+
+    // const blurHandler = () => {
+    //     setShowAutoComplete(false);
+    // };
 
     const enterPressed = (e) => {
         const inputValue = e.target.value.toUpperCase();
@@ -51,14 +81,31 @@ function NavBar() {
     return (
         <>
             <div className="flex-center-column">
-                {/* <h1 className="nav-title">Weather App</h1> */}
                 <nav className="navbar">
-                    <input
-                        type="text"
-                        onKeyUp={(e) => enterPressed(e)}
-                        className="navbar-input"
-                        placeholder="Enter your city"
-                    />
+                    <div className="search-menu">
+                        <input
+                            autoComplete="on"
+                            type="text"
+                            list="suggestions"
+                            onKeyUp={(e) => enterPressed(e)}
+                            onChange={(e) => autoComplete(e)}
+                            // onBlur={blurHandler}
+                            className="navbar-input"
+                            placeholder="Enter your city"
+                        />
+                        {/* {showAutoComplete ? (
+                            <ul className="dropdown">
+                                {suggestions.map((city, index) => {
+                                    return <li key={index}>{city}</li>;
+                                })}
+                            </ul>
+                        ) : null} */}
+                        <datalist id="suggestions">
+                            {suggestions.map((city, index) => {
+                                return <option key={index} value={city} />;
+                            })}
+                        </datalist>
+                    </div>
                 </nav>
             </div>
         </>

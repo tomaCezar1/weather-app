@@ -5,26 +5,66 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.nav-title {
-    font-size: 50px;
-    color: $white;
-    padding: 60px 0;
-    letter-spacing: 1px;
-    font-weight: 500;
+    position: relative;
 }
 
 .navbar-input {
     border: none;
     padding: 15px 25px;
-    max-width: 500px;
+    margin-top: 5px;
+    width: 300px;
     font-size: 20px;
     color: #3b3b3b;
-    border-radius: 30px;
-    transition: focus 0.2s ease 0s;
+    border-radius: 5px;
+    transition: focus 0.2s ease;
+    transition: border-radius 0.3s ease;
     &:focus {
         border-color: #9ecaed;
         box-shadow: 0 0 10px #9ecaed;
     }
+}
+
+.toast-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.toast {
+    width: 350px;
+    height: 75px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 10px;
+    color: $lightGrey;
+    background-color: $red;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    z-index: 2;
+    width: 300px;
+    background: $white;
+}
+
+// datalist arrow removal
+input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+#suggestions {
+    margin-top: 10px;
 }

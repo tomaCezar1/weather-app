@@ -28,15 +28,19 @@ function Home(): JSX.Element {
 
     return (
         <>
-            <div className="cards-container" ref={divRef}>
-                {homeCities.map((city, index) => {
-                    return <WeatherCard key={index} cityID={city} />;
-                })}
+            <div className="home-container">
+                <div className="cards-container" ref={divRef}>
+                    {homeCities.map((city, index) => {
+                        return <WeatherCard key={index} cityID={city} />;
+                    })}
+                </div>
                 {showToast ? (
-                    <div
-                        className={`toast ${unmountToast ? 'delete-toast' : ''}`}
-                        onClick={triggerDelete}>
-                        You need to delete a card before adding a new one...
+                    <div className="toast-container">
+                        <div
+                            className={`toast ${unmountToast ? 'delete-toast' : ''}`}
+                            onClick={triggerDelete}>
+                            You need to delete a card before adding a new one...
+                        </div>
                     </div>
                 ) : null}
             </div>
