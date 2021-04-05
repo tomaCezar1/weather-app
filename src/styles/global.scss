@@ -40,6 +40,31 @@ input {
     align-items: center;
 }
 
+.toast {
+    width: 350px;
+    height: 75px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: $lightGrey;
+    background-color: $red;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
 .delete-toast {
     animation: delete-toast 750ms ease-in-out;
 }
@@ -47,10 +72,9 @@ input {
 @keyframes delete-toast {
     0% {
         opacity: 1;
-        transform: translateX(0);
     }
     100% {
         opacity: 0;
-        transform: translateY(-50px);
+        transform: translateX(-50px);
     }
 }

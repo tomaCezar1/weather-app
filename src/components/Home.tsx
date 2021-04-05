@@ -1,6 +1,8 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
-import WeatherCard from './WeatherCard';
 import { Context } from '../context/Context';
+
+import WeatherCard from './WeatherCard';
+import CloseBtn from '../images/cancel.svg';
 
 function Home(): JSX.Element {
     const {
@@ -35,12 +37,14 @@ function Home(): JSX.Element {
                     })}
                 </div>
                 {showToast ? (
-                    <div className="toast-container">
-                        <div
-                            className={`toast ${unmountToast ? 'delete-toast' : ''}`}
-                            onClick={triggerDelete}>
-                            You need to delete a card before adding a new one...
-                        </div>
+                    <div className={`toast ${unmountToast ? 'delete-toast' : ''}`}>
+                        You need to delete a card before adding a new one...
+                        <img
+                            className="toast-btn"
+                            src={CloseBtn}
+                            onClick={triggerDelete}
+                            alt="close button"
+                        />
                     </div>
                 ) : null}
             </div>
