@@ -1,10 +1,12 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import WeatherCard from './WeatherCard';
 import { Context } from '../context/Context';
+import Toast from './Toast';
 
 function Home(): JSX.Element {
     const {
         homeCities,
+        setHomeCities,
         setNumberOfHomeCards,
         showToast,
         setShowToast,
@@ -30,8 +32,8 @@ function Home(): JSX.Element {
         <>
             <div className="home-container">
                 <div className="cards-container" ref={divRef}>
-                    {homeCities.map((city, index) => {
-                        return <WeatherCard key={index} cityID={city} />;
+                    {homeCities.map((city) => {
+                        return <WeatherCard key={city} cityID={city} />;
                     })}
                 </div>
                 {showToast ? (

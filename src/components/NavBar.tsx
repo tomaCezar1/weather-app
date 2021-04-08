@@ -1,64 +1,104 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../context/Context';
 import { API_KEY } from '../utils/utils';
+import useDebounce from '../utils/useDebounce';
+import Toast from './Toast';
 
 function NavBar() {
     const {
         homeCities,
         setHomeCities,
-        baseCities,
         numberOfHomeCards,
         setShowToast,
         setUnmountToast
     } = useContext(Context);
 
-    useEffect(() => {
-        console.log(suggestions);
-    });
-
     const [suggestions, setSuggestions] = useState([]);
-    // const [showSuggestions, setShowSuggestions] = useState(false);
-    // const [showAutoComplete, setShowAutoComplete] = useState(false);
+    // const [showToast, setShowToast] = useState(false);
 
     const autoComplete = (e) => {
-        // setShowAutoComplete(true);
         const input = e.target.value.toLowerCase();
 
-        // if (input.length < 1) {
-        // setShowAutoComplete(false);
-        // }
-
-        const arr = baseCities.map((city) => city.toLowerCase());
+        const arr = homeCities.map((city) => city.toLowerCase());
 
         const suggestion = arr.filter((city) => city.startsWith(input));
+
         if (suggestion) {
             setSuggestions(suggestion);
-            // setShowSuggestions(true);
         }
     };
 
-    // const blurHandler = () => {
-    //     setShowAutoComplete(false);
+    // const timeouts = [];
+    // let ready1 = true;
+    // let ready2 = true;
+
+    // const debounce = (callback, delay) => {
+    //     console.log(callback, delay);
+    //     let timeout;
+    //     return function () {
+    //         clearTimeout(timeout);
+    //         timeout = setTimeout(callback, delay);
+    //     };
     // };
 
     const enterPressed = (e) => {
         const inputValue = e.target.value.toUpperCase();
 
+        // console.log('enter fired');
+
         if (e.keyCode === 13 && e.key === 'Enter') {
+            console.log(numberOfHomeCards);
+
             if (numberOfHomeCards >= 9) {
                 setShowToast(true);
+
+                // for (let i = 0; i < timeouts.length; i++) {
+                //     clearTimeout(timeouts[i]);
+                //     console.log(timeouts);
+                // }
+
+                // timeouts.push(
+                //     setTimeout(() => {
+                //         setUnmountToast(true);
+                //         console.log('timeout');
+                //     }, 4250)
+                // );
+                // timeouts.push(
+                //     setTimeout(() => {
+                //         setUnmountToast(false);
+                //         setShowToast(false);
+                //     }, 5000)
+                // );
+
+                // ready1 = false;
+                // ready2 = false;
+
                 setTimeout(() => {
                     setUnmountToast(true);
-                }, 4300);
+                    console.log('timeout 1');
+                    // ready1 = true;
+                }, 4250);
                 setTimeout(() => {
-                    setShowToast(false);
                     setUnmountToast(false);
+                    setShowToast(false);
+                    console.log('timeout 2');
+                    // ready2 = true;
                 }, 5000);
+
+                // const promise1 = new Promise(() => {
+                //     setTimeout(() => {
+                //         setUnmountToast(true);
+                //         console.log('timeout 1');
+                //     }, 4250);
+                // });
+
+                // promise1.then(() => (ready1 = true));
             } else {
                 const cities = [...homeCities];
                 const upperCaseCities = cities.map((city) => city.toUpperCase());
+                const indexOfInputCity = upperCaseCities.indexOf(inputValue);
 
-                if (upperCaseCities.indexOf(inputValue) < 0) {
+                if (indexOfInputCity < 0) {
                     fetchWeather(inputValue);
                 }
             }
@@ -87,19 +127,13 @@ function NavBar() {
                             autoComplete="on"
                             type="text"
                             list="suggestions"
-                            onKeyUp={(e) => enterPressed(e)}
+                            // onKeyDown={(e) => debounce(() => enterPressed(e), 5000)}
+                            onKeyDown={(e) => enterPressed(e)}
                             onChange={(e) => autoComplete(e)}
-                            // onBlur={blurHandler}
                             className="navbar-input"
                             placeholder="Enter your city"
                         />
-                        {/* {showAutoComplete ? (
-                            <ul className="dropdown">
-                                {suggestions.map((city, index) => {
-                                    return <li key={index}>{city}</li>;
-                                })}
-                            </ul>
-                        ) : null} */}
+
                         <datalist id="suggestions">
                             {suggestions.map((city, index) => {
                                 return <option key={index} value={city} />;
@@ -107,6 +141,7 @@ function NavBar() {
                         </datalist>
                     </div>
                 </nav>
+                {/* {showToast ? <Toast /> : null} */}
             </div>
         </>
     );
