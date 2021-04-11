@@ -17,6 +17,18 @@ function WeatherCard({ cityID }): JSX.Element {
     const [time, setTime] = useState('');
     const [timezone, setTimezone] = useState(0);
 
+    const baseCities: string[] = [
+        'London',
+        'Bucharest',
+        'Atlanta',
+        'Montevideo',
+        'Chisinau',
+        'Amsterdam',
+        'Seattle',
+        'Bogota',
+        'Cluj-Napoca'
+    ];
+
     const fetchWeather = () => {
         fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${cityID}&units=metric&appid=${API_KEY}`
@@ -44,20 +56,9 @@ function WeatherCard({ cityID }): JSX.Element {
         fetchWeather();
     }, []);
 
-    const baseCitiesStyles = [
-        'London',
-        'Bucharest',
-        'Atlanta',
-        'Montevideo',
-        'Chisinau',
-        'Amsterdam',
-        'Seattle',
-        'Bogota',
-        'Cluj-Napoca'
-    ];
     // set the card background appropriately
     const checkForDefaultCity = (city: string) => {
-        if (baseCitiesStyles.indexOf(city) > -1) {
+        if (baseCities.indexOf(city) > -1) {
             setCityBg(city.toLowerCase());
         } else setCityBg('default');
     };

@@ -33,6 +33,14 @@ input {
     border: none;
 }
 
+.display-none {
+    display: none;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
 .flex-center-column {
     display: flex;
     flex-direction: column;
@@ -49,11 +57,18 @@ input {
     left: 50%;
     transform: translateX(-50%);
     color: $lightGrey;
-    background-color: $red;
     padding: 10px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.toast-red {
+    background-color: $red;
+}
+
+.toast-green {
+    background-color: $green;
 }
 
 .toast-btn {
@@ -75,6 +90,6 @@ input {
     }
     100% {
         opacity: 0;
-        transform: translateX(-50px);
+        transform: translateX(-300px);
     }
 }

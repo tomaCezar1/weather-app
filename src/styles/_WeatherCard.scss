@@ -19,6 +19,7 @@
 }
 
 .card-container {
+    justify-self: center;
     width: 100%;
     max-width: 500px;
     height: 200px;
@@ -111,18 +112,13 @@
 
 @keyframes delete {
     0% {
-        // flex: 1;
-        // width: 100%;
+        width: 100%;
         opacity: 1;
-        // visibility: visible;
         transform: translateX(0);
     }
 
     100% {
-        // flex: 0;
-        // width: 0;
         opacity: 0;
-        // visibility: hidden;
         transform: translateX(-50px);
     }
 }

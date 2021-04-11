@@ -1,98 +1,71 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
+
 import { Context } from '../context/Context';
 import { API_KEY } from '../utils/utils';
-import useDebounce from '../utils/useDebounce';
-import Toast from './Toast';
+import { toastContext } from '../context/toastContext';
 
 function NavBar() {
-    const {
-        homeCities,
-        setHomeCities,
-        numberOfHomeCards,
-        setShowToast,
-        setUnmountToast
-    } = useContext(Context);
+    const { homeCities, setHomeCities } = useContext(Context);
+
+    const { setShowToast, setUnmountToast } = useContext(toastContext);
 
     const [suggestions, setSuggestions] = useState([]);
-    // const [showToast, setShowToast] = useState(false);
+
+    const baseCities: string[] = [
+        'London',
+        'Bucharest',
+        'Atlanta',
+        'Montevideo',
+        'Chisinau',
+        'Amsterdam',
+        'Seattle',
+        'Bogota',
+        'Cluj-Napoca',
+        'Medellin',
+        'Sofia',
+        'Iasi',
+        'Copenhagen',
+        'Denver',
+        'Parana',
+        'Skopje'
+    ];
 
     const autoComplete = (e) => {
         const input = e.target.value.toLowerCase();
 
-        const arr = homeCities.map((city) => city.toLowerCase());
+        const arr = baseCities.map((city) => city.toLowerCase());
 
         const suggestion = arr.filter((city) => city.startsWith(input));
 
+        const copySuggestion = [...suggestion];
+
+        const capitalizedSuggestions = [];
+
+        copySuggestion.map((text) => {
+            const value = text.charAt(0).toUpperCase() + text.slice(1);
+            capitalizedSuggestions.push(value);
+        });
+
         if (suggestion) {
-            setSuggestions(suggestion);
+            setSuggestions(capitalizedSuggestions);
         }
     };
-
-    // const timeouts = [];
-    // let ready1 = true;
-    // let ready2 = true;
-
-    // const debounce = (callback, delay) => {
-    //     console.log(callback, delay);
-    //     let timeout;
-    //     return function () {
-    //         clearTimeout(timeout);
-    //         timeout = setTimeout(callback, delay);
-    //     };
-    // };
 
     const enterPressed = (e) => {
         const inputValue = e.target.value.toUpperCase();
 
-        // console.log('enter fired');
-
         if (e.keyCode === 13 && e.key === 'Enter') {
-            console.log(numberOfHomeCards);
-
-            if (numberOfHomeCards >= 9) {
-                setShowToast(true);
-
-                // for (let i = 0; i < timeouts.length; i++) {
-                //     clearTimeout(timeouts[i]);
-                //     console.log(timeouts);
-                // }
-
-                // timeouts.push(
-                //     setTimeout(() => {
-                //         setUnmountToast(true);
-                //         console.log('timeout');
-                //     }, 4250)
-                // );
-                // timeouts.push(
-                //     setTimeout(() => {
-                //         setUnmountToast(false);
-                //         setShowToast(false);
-                //     }, 5000)
-                // );
-
-                // ready1 = false;
-                // ready2 = false;
+            if (homeCities.length >= 9) {
+                setShowToast('red');
 
                 setTimeout(() => {
                     setUnmountToast(true);
-                    console.log('timeout 1');
-                    // ready1 = true;
                 }, 4250);
+
                 setTimeout(() => {
                     setUnmountToast(false);
-                    setShowToast(false);
-                    console.log('timeout 2');
-                    // ready2 = true;
+                    setShowToast(null);
                 }, 5000);
-
-                // const promise1 = new Promise(() => {
-                //     setTimeout(() => {
-                //         setUnmountToast(true);
-                //         console.log('timeout 1');
-                //     }, 4250);
-                // });
-
-                // promise1.then(() => (ready1 = true));
             } else {
                 const cities = [...homeCities];
                 const upperCaseCities = cities.map((city) => city.toUpperCase());
@@ -100,6 +73,28 @@ function NavBar() {
 
                 if (indexOfInputCity < 0) {
                     fetchWeather(inputValue);
+
+                    setShowToast(inputValue.toLowerCase());
+
+                    setTimeout(() => {
+                        setUnmountToast(true);
+                    }, 4250);
+
+                    setTimeout(() => {
+                        setUnmountToast(false);
+                        setShowToast(null);
+                    }, 5000);
+                } else {
+                    setShowToast('existent');
+
+                    setTimeout(() => {
+                        setUnmountToast(true);
+                    }, 4250);
+
+                    setTimeout(() => {
+                        setUnmountToast(false);
+                        setShowToast(null);
+                    }, 5000);
                 }
             }
         }
@@ -127,7 +122,6 @@ function NavBar() {
                             autoComplete="on"
                             type="text"
                             list="suggestions"
-                            // onKeyDown={(e) => debounce(() => enterPressed(e), 5000)}
                             onKeyDown={(e) => enterPressed(e)}
                             onChange={(e) => autoComplete(e)}
                             className="navbar-input"
@@ -135,13 +129,12 @@ function NavBar() {
                         />
 
                         <datalist id="suggestions">
-                            {suggestions.map((city, index) => {
-                                return <option key={index} value={city} />;
+                            {suggestions.map((city) => {
+                                return <option key={city} value={city} />;
                             })}
                         </datalist>
                     </div>
                 </nav>
-                {/* {showToast ? <Toast /> : null} */}
             </div>
         </>
     );

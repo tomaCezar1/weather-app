@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 
 const defaultState = {
-    homeCities: []
+    homeCities: [],
+    setHomeCities: [],
+    baseCities: []
 };
 
 const Context = React.createContext(defaultState);
 
 function ContextProvider({ children }): JSX.Element {
-    const [homeCities, setHomeCities] = useState([
+    const [homeCities, setHomeCities] = useState<string[]>([
         'London',
         'Bucharest',
         'Atlanta',
@@ -19,34 +21,11 @@ function ContextProvider({ children }): JSX.Element {
         'Cluj-Napoca'
     ]);
 
-    const [numberOfHomeCards, setNumberOfHomeCards] = useState(9);
-    const [showToast, setShowToast] = useState(false);
-    const [unmountToast, setUnmountToast] = useState(false);
-
-    const baseCities = [
-        'London',
-        'Bucharest',
-        'Atlanta',
-        'Montevideo',
-        'Chisinau',
-        'Amsterdam',
-        'Seattle',
-        'Bogota',
-        'Cluj-Napoca'
-    ];
-
     return (
         <Context.Provider
             value={{
                 homeCities,
-                setHomeCities,
-                baseCities,
-                numberOfHomeCards,
-                setNumberOfHomeCards,
-                showToast,
-                setShowToast,
-                unmountToast,
-                setUnmountToast
+                setHomeCities
             }}>
             {children}
         </Context.Provider>

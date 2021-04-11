@@ -1,53 +1,32 @@
-import React, { useContext, useRef, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
 import { Context } from '../context/Context';
+import { toastContext } from '../context/toastContext';
+import WeatherCard from './WeatherCard';
 import Toast from './Toast';
 
-import WeatherCard from './WeatherCard';
-import CloseBtn from '../images/cancel.svg';
-
 function Home(): JSX.Element {
-    const {
-        homeCities,
-        setHomeCities,
-        setNumberOfHomeCards,
-        showToast,
-        setShowToast,
-        unmountToast,
-        setUnmountToast
-    } = useContext(Context);
+    const { homeCities } = useContext(Context);
 
-    const divRef = useRef(null);
+    const { showToast } = useContext(toastContext);
 
-    useEffect(() => {
-        setNumberOfHomeCards(divRef.current.childElementCount);
-    });
-
-    const triggerDelete = () => {
-        setUnmountToast(true);
-        setTimeout(() => {
-            setShowToast(false);
-            setUnmountToast(false);
-        }, 750);
-    };
+    const errorTextforToast: string = `You need to delete ${homeCities.length - 8} card`;
+    const succesTextforToast: string = `You added a new card: ${showToast}`;
 
     return (
         <>
             <div className="home-container">
-                <div className="cards-container" ref={divRef}>
+                <div className="cards-container">
                     {homeCities.map((city) => {
                         return <WeatherCard key={city} cityID={city} />;
                     })}
                 </div>
-                {showToast ? (
-                    <div className={`toast ${unmountToast ? 'delete-toast' : ''}`}>
-                        You need to delete a card before adding a new one...
-                        <img
-                            className="toast-btn"
-                            src={CloseBtn}
-                            onClick={triggerDelete}
-                            alt="close button"
-                        />
-                    </div>
+                {showToast === 'red' ? <Toast type="red" text={errorTextforToast} /> : null}
+                {showToast === 'existent' ? (
+                    <Toast type="red" text="You already have this card !" />
+                ) : null}
+                {showToast !== 'red' && showToast !== 'existent' && showToast !== null ? (
+                    <Toast type="green" text={succesTextforToast} />
                 ) : null}
             </div>
         </>
