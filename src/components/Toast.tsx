@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 
-import { toastContext } from '../context/toastContext';
+import { ToastContext } from '../context/ToastContext';
 import CloseBtn from '../images/cancel.svg';
 
 function Toast({ type, text }) {
-    const { setShowToast, unmountToast, setUnmountToast } = useContext(toastContext);
+    const { setShowToast, unmountToast, setUnmountToast } = useContext(ToastContext);
 
     const triggerDelete = () => {
         setUnmountToast(true);

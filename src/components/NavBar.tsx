@@ -2,12 +2,12 @@ import React, { useContext, useState } from 'react';
 
 import { Context } from '../context/Context';
 import { API_KEY } from '../utils/utils';
-import { toastContext } from '../context/toastContext';
+import { ToastContext } from '../context/ToastContext';
 
 function NavBar() {
     const { homeCities, setHomeCities } = useContext(Context);
 
-    const { setShowToast, setUnmountToast } = useContext(toastContext);
+    const { setUnmountToast, setShowToast } = useContext(ToastContext);
 
     const [suggestions, setSuggestions] = useState([]);
 
@@ -109,7 +109,6 @@ function NavBar() {
                 const name = res.name;
                 const copy = homeCities.concat(name);
                 setHomeCities(copy);
-                console.log('fetched');
             });
     };
 

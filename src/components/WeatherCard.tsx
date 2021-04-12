@@ -8,14 +8,13 @@ import CloseBtn from '../images/cancel.svg';
 function WeatherCard({ cityID }): JSX.Element {
     const { homeCities, setHomeCities } = useContext(Context);
 
-    const [city, setCity] = useState(null);
-    const [cityBg, setCityBg] = useState(null);
-    const [currTemp, setCurrTemp] = useState(null);
-    const [hovered, setHovered] = useState(false);
-    const [deleted, setDeleted] = useState(false);
-    const [unmounted, setUnmounted] = useState(false);
-    const [time, setTime] = useState('');
-    const [timezone, setTimezone] = useState(0);
+    const [city, setCity] = useState<string>(null);
+    const [cityBg, setCityBg] = useState<string>(null);
+    const [currTemp, setCurrTemp] = useState<number>(null);
+    const [hovered, setHovered] = useState<boolean>(false);
+    const [deleted, setDeleted] = useState<boolean>(false);
+    const [unmounted, setUnmounted] = useState<boolean>(false);
+    const [time, setTime] = useState<string>('');
 
     const baseCities: string[] = [
         'London',
@@ -30,7 +29,7 @@ function WeatherCard({ cityID }): JSX.Element {
     ];
 
     const fetchWeather = () => {
-        fetch(
+        return fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${cityID}&units=metric&appid=${API_KEY}`
         )
             .then((res) => res.json())
@@ -45,16 +44,11 @@ function WeatherCard({ cityID }): JSX.Element {
                 const t = Number(temperature.toFixed(1));
                 setCurrTemp(t);
 
-                const timezone = res?.timezone;
-                setTimezone(timezone);
+                const timezone = res.timezone;
 
-                console.log('fetched');
+                return timezone;
             });
     };
-
-    useEffect(() => {
-        fetchWeather();
-    }, []);
 
     // set the card background appropriately
     const checkForDefaultCity = (city: string) => {
@@ -63,11 +57,15 @@ function WeatherCard({ cityID }): JSX.Element {
         } else setCityBg('default');
     };
 
-    // clean up setTimeout before unmounting
     useEffect(() => {
-        const timer = setInterval(() => {
-            changeTime(timezone);
-        }, 1000);
+        let timer;
+        fetchWeather().then((timezone) => {
+            timer = setInterval(() => {
+                changeTime(timezone);
+            }, 1000);
+        });
+
+        // clean up setTimeout before unmounting
         return () => clearInterval(timer);
     }, []);
 

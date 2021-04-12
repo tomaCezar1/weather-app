@@ -7,7 +7,7 @@ import SEO from '../components/seo';
 import '../styles/global.scss';
 import Home from '../components/Home';
 import { ContextProvider } from '../context/Context';
-import { ToastContextProvider } from '../context/toastContext';
+import { ToastContextProvider } from '../context/ToastContext';
 
 const IndexPage = () => (
     <ContextProvider>
