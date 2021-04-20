@@ -1,13 +1,4 @@
 .cards-container {
-    // display: flex;
-    // justify-content: center;
-    // // align-items: center;
-    // flex-wrap: wrap;
-    // gap: 30px;
-    // // width: 100%;
-    // margin: auto;
-    // padding: 20px;
-    // transition: all 0.4ss ease-out;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     align-content: center;
@@ -52,11 +43,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: $lightGrey;
+    // background: $lightGrey;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+    backdrop-filter: blur(2px);
     padding: 6px 20px 6px 20px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .card-details {
@@ -93,7 +88,9 @@
     padding: 5px 10px;
     overflow: hidden;
     transition: transform 0.3s ease;
-    background: $lightGrey;
+    // background: $lightGrey;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+    backdrop-filter: blur(2px);
     border-radius: 10px;
 }
 
