@@ -1,0 +1,209 @@
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    align-content: center;
+    grid-gap: 30px;
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    transition: 0.4s ease;
+}
+
+.card-container {
+    justify-self: center;
+    width: 100%;
+    max-width: 500px;
+    height: 200px;
+    border-radius: 10px;
+    display: flex;
+    color: $black;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+        transform: scale(1.03);
+        box-shadow: 0px 10px 25px 4px rgba(35, 35, 35, 0.48);
+    }
+    &:hover .card-location {
+        transform: scale(1.05);
+    }
+    &:hover .card-delete-btn {
+        transform: scale(1.1);
+    }
+    &:hover .card-details {
+        transform: scale(1.1);
+    }
+}
+
+.card-details-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // background: $lightGrey;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+    backdrop-filter: blur(2px);
+    padding: 6px 20px 6px 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.card-details {
+    transition: transform 0.3s ease;
+}
+
+.card-delete-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.btn-hovered {
+    transition: opacity 0.5s ease;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.card-location-container {
+    padding: 20px;
+    align-self: flex-start;
+}
+
+.card-location {
+    font-size: 28px;
+    padding: 5px 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    // background: $lightGrey;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+    backdrop-filter: blur(2px);
+    border-radius: 10px;
+}
+
+.card-details-desc {
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.deleted-card {
+    animation: delete 750ms forwards;
+}
+
+.card-city {
+    text-transform: capitalize;
+}
+
+@keyframes delete {
+    0% {
+        width: 100%;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+}
+
+.unmounted-card {
+    display: none;
+}
+
+// Weather types
+// .clear-sky {
+//     background: url('../images/clear.jpg') center/cover no-repeat;
+// }
+
+// .rain {
+//     background: url('../images/rain.jpg') center/cover no-repeat;
+// }
+
+// .clouds {
+//     background: url('../images/clouds.jpg') center/cover no-repeat;
+// }
+
+// .snow {
+//     background: url('../images/snow.jpg') center/cover no-repeat;
+// }
+
+// .mist {
+//     background: url('../images/mint.jpg') center/cover no-repeat;
+// }
+
+.london {
+    background: url('../images/london.jpeg') center/cover no-repeat;
+}
+
+.bogota {
+    background: url('../images/bogota.jpg') center/cover no-repeat;
+}
+
+.seattle {
+    background: url('../images/seattle.jpg') center/cover no-repeat;
+}
+
+.bucharest {
+    background: url('../images/bucharest.jpg') center/cover no-repeat;
+}
+
+.atlanta {
+    background: url('../images/atlanta.jpg') center/cover no-repeat;
+}
+
+.amsterdam {
+    background: url('../images/amsterdam.jpg') center/cover no-repeat;
+}
+
+.cluj-napoca {
+    background: url('../images/cluj.jpg') center/cover no-repeat;
+}
+
+.montevideo {
+    background: url('../images/montevideo.jpg') center/cover no-repeat;
+}
+
+.chisinau {
+    background: url('../images/chisinau.jpg') center/cover no-repeat;
+}
+
+.default {
+    background: url('../images/default.jpg') center/cover no-repeat;
+}
+
+@media all and (min-width: 0px) and (max-width: 580px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card-location {
+        font-size: 30px;
+    }
+}
+
+@media all and (min-width: 581px) and (max-width: 960px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+@media all and (min-width: 1500px) {
+    .cards-container {
+        grid-template-columns: repeat(3, 460px);
+        justify-content: center;
+    }
+}

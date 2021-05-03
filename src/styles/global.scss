@@ -1,0 +1,95 @@
+@import './layout.scss';
+@import './layout.scss';
+@import './WeatherCard.scss';
+@import './NavBar';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    &::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background: url('../images/bgImage.jpg') center center no-repeat;
+    }
+}
+
+input {
+    outline: none;
+    border: none;
+}
+
+.display-none {
+    display: none;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.flex-center-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast {
+    width: 350px;
+    height: 75px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: $lightGrey;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast-red {
+    background-color: $red;
+}
+
+.toast-green {
+    background-color: $green;
+}
+
+.toast-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.delete-toast {
+    animation: delete-toast 750ms ease-in-out;
+}
+
+@keyframes delete-toast {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-300px);
+    }
+}

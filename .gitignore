@@ -1,3 +1,11 @@
+#api keys
+.env.development
+.env.production
+
+.idea/
+
+.firebase/
+
 # Logs
 logs
 *.log
